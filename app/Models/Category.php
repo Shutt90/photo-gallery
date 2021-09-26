@@ -16,6 +16,6 @@ class Category extends Model
 
     public function galleryRelation()
     {
-        return $this->belongsTo(Gallery::class)
+        return $this->belongsTo(Gallery::class);
     }
 }

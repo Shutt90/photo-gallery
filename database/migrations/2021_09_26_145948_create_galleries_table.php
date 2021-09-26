@@ -17,7 +17,7 @@ class CreateGalleriesTable extends Migration
             $table->id();
             $table->text('title');
             $table->string('file_path');
-            $table->increments('category_id');
+            $table->bigInteger('category_id');
             $table->timestamps();
         });
     }

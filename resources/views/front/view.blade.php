@@ -24,6 +24,7 @@
         <a class="fake-nav">
             {{$nav->name}}
         </a>
+        @endforeach
     </nav>
     <div class="image-container">
         <img name="slider">

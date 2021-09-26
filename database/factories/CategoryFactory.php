@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Gallery;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class GalleryFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Gallery::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,8 @@ class GalleryFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->word,
-            'file_path' => $this->faker->imageUrl(),
-            'category_id' => rand(1, 5),
-
+            'name' => $this->faker->word,
+            'slug' => $this->faker->word,
         ];
     }
 }
