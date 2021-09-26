@@ -18,8 +18,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [GalleryController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'index'])->name('login.store');
-
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/admin', [BackendController::class, 'index'])->middleware('auth')->name('admin');
 

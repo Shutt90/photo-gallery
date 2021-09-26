@@ -9,12 +9,14 @@
 <body>
     <form method="POST" action="{{route('login.store')}}">
         @csrf
-        @method('post')
         <label for="username">Username:</label>
-        <input type="text" name="username">
+        <input type="text" name="email">
         <label for="password">Password:</label>
         <input type="password" name="password">
         <input type="submit">
+
+        @include('admin.errors')
+
     </form>
 </body>
 </html>
