@@ -26,7 +26,7 @@ class GalleryController extends Controller
         $gallery = Gallery::with('categoryRelation')->orderBy('id', 'desc')->get();
         $category = Category::orderBy('id', 'asc')->get();
 
-        return view('front.view', compact('gallery','category'));
+        return view('', compact('gallery','category'));
         
     }
 }

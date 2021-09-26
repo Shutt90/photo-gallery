@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.view');
-});
-
+Route::get('/', [GalleryController::class, 'index'])->name('home');
 Route::get('/admin', [GalleryController::class, 'admin'])->name('admin');
 Route::get('/login', [LoginControlller::class, 'index']);
