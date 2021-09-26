@@ -18,4 +18,15 @@ class GalleryController extends Controller
         return view('front.view', compact('gallery','category'));
         
     }
+
+
+    public function admin()
+    {
+
+        $gallery = Gallery::with('categoryRelation')->orderBy('id', 'desc')->get();
+        $category = Category::orderBy('id', 'asc')->get();
+
+        return view('front.view', compact('gallery','category'));
+        
+    }
 }

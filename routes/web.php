@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('front.view');
 });
+
+Route::get('/admin', [GalleryController::class, 'admin'])->name('admin');
+Route::get('/login', [LoginControlller::class, 'index']);
