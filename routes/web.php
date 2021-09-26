@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\BackendController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [GalleryController::class, 'index'])->name('home');
-Route::get('/admin', [GalleryController::class, 'admin'])->name('admin');
-Route::get('/login', [LoginControlller::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'index'])->name('login.store');
+
+
+Route::get('/admin', [BackendController::class, 'index'])->middleware('auth')->name('admin');
+
