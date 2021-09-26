@@ -18,4 +18,32 @@ class BackendController extends Controller
         return view('admin.view', compact('gallery','category'));
         
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'file' => 'mimes:jpg,png,jpeg'
+        ]);
+
+        $fileModel = new Gallery;
+
+        if($request->file()) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('images', $fileName, 'public');
+            $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' .  $filePath;
+            $fileModel->save();
+
+            return back()
+            ->with('Success', 'Image has successfully been uploaded')
+            ->with('file', $fileName);
+        };
+    }
+
+    public function destroy(int $id)
+    {
+        $image = Gallery::find('id', $id);
+        $image->delete()->with('success', 'Image has been deleted');
+    }
+
 }

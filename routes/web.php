@@ -21,4 +21,5 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->na
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/admin', [BackendController::class, 'index'])->middleware('auth')->name('admin');
-
+Route::post('/admin', [BackendController::class, 'store'])->middleware('auth')->name('admin.store');
+Route::delete('/admin', [BackendController::class, 'destroy'])->middleware('auth')->name('admin.destroy');
