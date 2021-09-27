@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gallery;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 
 class BackendController extends Controller
 {
@@ -42,23 +40,28 @@ class BackendController extends Controller
         };
     }
 
-    public function update(int $id)
+    public function update(Request $request, int $id)
     {
 
-        $rules = array([
-            'title' => 'text|max:20',
-            'category_id' => 'required',
+        $validated = $request->validate([
+            'title' => 'max:20',
         ]);
 
-        $validator = Validator::make(Input::all(), $rules);
-
-        if($validator->fails()) {
-            return back()->withErrors($validator);
-        } else {
-            $image = Gallery::find('id', $id);
-            $image->title = Input::get('title');
-            $image->category_id = Input::get('category_id');
+        if($validated) {
+            Gallery::findOrFail($id)
+            ->update([
+                'title' => $request->title,
+            ]);
         
+            return back()->with('success', "Image has been updated");
+        }
+
+        if($validated && $request->category_id) {
+            Category::where('id', $request->category_id)
+            ->update([
+                'category_id' => $request->category_id,
+            ]);
+
             return back();
         }
 

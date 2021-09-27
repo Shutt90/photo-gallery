@@ -31,15 +31,22 @@
                 <h3 class="image-gallery__container-name">
                     {{$item->name}}
                 </h3>
-                <form method="PUT" action="{{route('admin.update')}}">
-                    <select onchange="this.form.submit()">
+                <form method="POST" action="{{route('admin.update', $item->id)}}">
+                    @method('PUT')
+                    @csrf
+                    <label for="title">Image Name:</label>
+                    <input type="text" name="title">
+                    <label for="category_id">Category:</label>
+                    <select name="category_id">
                         @foreach($category as $cat)
-                        <option @if($item->categoryRelation->get()->id) selected="selected" @endif>{{$cat->name}}</option>
+                        <option @if($cat->id === $item->category_id) selected="selected" @endif>{{$cat->name}}</option>
                         @endforeach
                     </select>
+                    <input name="update" type="submit">
                 </form>
             </div>
             @endforeach
+            @include('admin.errors')
         </div>
     </section>
 </body>

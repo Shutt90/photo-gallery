@@ -30,7 +30,7 @@ class LoginController extends Controller
             
         auth()->attempt($request->only('email', 'password'));
 
-        return redirect()->route('admin');
+        return redirect()->route('admin.index');
         
         
     }
