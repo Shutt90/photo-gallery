@@ -15,7 +15,7 @@
                 @method('POST')
                 <input name="file" type="file">
                 <input type="text" name="name">
-                <select onchange="this.form.submit();"name="categories">
+                <select name="categories">
                     @foreach($gallery as $item)
                     <option>{{$item->title}}</option>
                     @endforeach
