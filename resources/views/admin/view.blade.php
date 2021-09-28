@@ -10,14 +10,14 @@
     <section>
         <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
         <div class="image-upload">
-            <form method="POST" action="{{route('admin.store')}}">
+            <form method="POST" action="{{route('admin.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-                <input name="file" type="file">
-                <input type="text" name="name">
-                <select name="categories">
-                    @foreach($gallery as $item)
-                    <option>{{$item->title}}</option>
+                <input type="file" name="file_path">
+                <input type="text" name="title">
+                <select name="category_id">
+                    @foreach($category as $cat)
+                    <option value="{{$cat->id}}">{{$cat->name}}</option>
                     @endforeach
                 </select>
                 <input name="submit" type="submit">
@@ -39,15 +39,23 @@
                     <label for="category_id">Category:</label>
                     <select name="category_id">
                         @foreach($category as $cat)
-                        <option @if($cat->id === $item->category_id) selected="selected" @endif>{{$cat->name}}</option>
+                        <option value="{{$cat->id}}" @if($cat->id === $item->category_id) selected="selected" @endif>{{$cat->name}}</option>
                         @endforeach
                     </select>
                     <input name="update" type="submit">
+                </form>
+                <form method="POST" action="{{route('admin.destroy', $item->id)}}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">
+                        <img src="{{asset('storage/images/delete-icon.png')}}">
+                    </button>
                 </form>
             </div>
             @endforeach
             @include('admin.errors')
         </div>
+        
     </section>
 </body>
 </html>

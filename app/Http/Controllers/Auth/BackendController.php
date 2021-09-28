@@ -22,17 +22,26 @@ class BackendController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'mimes:jpg,png,jpeg'
+            'title' => 'required|string|max:20',
+            'file_path' => 'required|mimes:jpg,png,jpeg',
+            'category_id' => 'required|integer',
         ]);
 
-        $fileModel = new Gallery;
+        Gallery::create([
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+            'file_path' => $request->file_path,
+        ]);
+
+        $fileModel = $request->file_path;
 
         if($request->file()) {
-            $fileName = time() . '_' . $request->file->getClientOriginalName();
-            $filePath = $request->file('file')->storeAs('images', $fileName, 'public');
-            $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
-            $fileModel->file_path = '/storage/' .  $filePath;
-            $fileModel->save();
+            $fileName = time() . '_' . $request->file_path->getClientOriginalName();
+            $filePath = $request->file('file_path')->storeAs('images', $fileName, 'public');
+            $fileModel->file_path = time() . '_' . $request->file_path->getClientOriginalName();
+            $fileModel->pathname = '/storage/app/public/images/' .  $filePath;
+
+            dd($fileModel);
 
             return back()
             ->with('Success', 'Image has successfully been uploaded')
@@ -45,32 +54,26 @@ class BackendController extends Controller
 
         $validated = $request->validate([
             'title' => 'max:20',
+            'category_id' => 'integer',
         ]);
 
         if($validated) {
             Gallery::findOrFail($id)
             ->update([
                 'title' => $request->title,
+                'category_id' => $request->category_id,
             ]);
         
             return back()->with('success', "Image has been updated");
-        }
-
-        if($validated && $request->category_id) {
-            Category::where('id', $request->category_id)
-            ->update([
-                'category_id' => $request->category_id,
-            ]);
-
-            return back();
         }
 
     }
 
     public function destroy(int $id)
     {
-        $image = Gallery::find('id', $id);
-        $image->delete()->with('success', 'Image has been deleted');
+        Gallery::find($id)->delete();
+
+        return back()->with('success', 'Image deleted');
     }
 
 }
