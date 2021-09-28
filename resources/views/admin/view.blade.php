@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/app.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Area</title>
 </head>
 <body>
-    <section>
-        <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
+    <section class="image">
+        <div class="image-head">
+            <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
+            <div class="image-head__links">
+                <a class="fake-link">Gallery</a>
+                <a class="fake-link">Categories</a>
+            </div>
+        </div>
         <div class="image-upload">
             {{Form::open(array('route' => 'admin.store' ,'files'=>'true'))}}
                 @csrf
@@ -27,11 +34,11 @@
         <div class="image-gallery">
             @foreach($gallery as $item)
             <div class="image-gallery__container">
-                <img src="{{asset('/storage/' . $item->file_path)}}" alt="{{$item->name}}">
+                <img class="image-gallery__item" src="{{asset('/storage/' . $item->file_path)}}" alt="{{$item->name}}">
                 <h3 class="image-gallery__container-name">
                     {{$item->name}}
                 </h3>
-                <form method="POST" action="{{route('admin.update', $item->id)}}">
+                <form class="update" method="POST" action="{{route('admin.update', $item->id)}}">
                     @method('PUT')
                     @csrf
                     <label for="title">Image Name:</label>
@@ -42,14 +49,16 @@
                         <option value="{{$cat->id}}" @if($cat->id === $item->category_id) selected="selected" @endif>{{$cat->name}}</option>
                         @endforeach
                     </select>
-                    <input name="update" type="submit">
+                    <input class="submit" name="update" type="submit">
                 </form>
                 <form method="POST" action="{{route('admin.destroy', $item->id)}}">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">
-                        <img src="{{asset('storage/images/delete-icon.png')}}">
-                    </button>
+                    <div class="delete">
+                        <button class="delete" type="submit">
+                            <img src="{{asset('storage/images/delete-icon.png')}}">
+                        </button>
+                    </div>
                 </form>
             </div>
             @endforeach
