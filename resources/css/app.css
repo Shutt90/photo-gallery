@@ -51,7 +51,7 @@ img {
 }
 
 .image {
-    
+
 }
 
 .image-head {
@@ -114,4 +114,8 @@ select {
     align-items: center;
     max-width: 400px;
 
+}
+
+.categories{
+    display: none;
 }

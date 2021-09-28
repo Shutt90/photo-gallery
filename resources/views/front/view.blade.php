@@ -38,7 +38,7 @@
     let imgs = [];
 
     @foreach($gallery as $item)
-    imgs.push("{{$item->file_path}}");
+    imgs.push("{{asset('/storage/' . $item->file_path)}}");
     @endforeach
 
     const slideShow = function(){

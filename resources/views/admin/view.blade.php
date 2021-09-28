@@ -8,14 +8,14 @@
     <title>Admin Area</title>
 </head>
 <body>
-    <section class="image">
-        <div class="image-head">
-            <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
-            <div class="image-head__links">
-                <a class="fake-link">Gallery</a>
-                <a class="fake-link">Categories</a>
-            </div>
+    <div class="image-head">
+        <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
+        <div class="image-head__links">
+            <a class="fake-link">Gallery</a>
+            <a class="fake-link">Categories</a>
         </div>
+    </div>
+    <section class="image">
         <div class="image-upload">
             {{Form::open(array('route' => 'admin.store' ,'files'=>'true'))}}
                 @csrf
@@ -66,5 +66,13 @@
         </div>
         
     </section>
+
+    <section class="categories">
+    <div class="categories-upload">
+            {{Form::open(array('route' => 'admin.store' ,'files'=>'true'))}}
+            {{Form::close()}}
+        </div>
+    </section>
+        
 </body>
 </html>
