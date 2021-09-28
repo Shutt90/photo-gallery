@@ -27,18 +27,15 @@ class BackendController extends Controller
             'category_id' => 'required|integer',
         ]);
 
-        Gallery::create([
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-        ]);
 
-        $fileModel = Gallery::create(['file_path' => $request->file_path]);
+        $fileModel = new Gallery;
 
         if($request->file('file_path')) {
             $fileName = time() . '_' . $request->file_path->getClientOriginalName();
             $filePath = $request->file('file_path')->storeAs('images', $fileName, 'public');
-            $fileModel->title = time() . '_' . $request->file_path->getClientOriginalName();
+            $fileModel->title = $request->title;
             $fileModel->file_path = $filePath;
+            $fileModel->category_id = $request->category_id;
             $fileModel->save();
         };
 

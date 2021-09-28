@@ -27,7 +27,7 @@
         <div class="image-gallery">
             @foreach($gallery as $item)
             <div class="image-gallery__container">
-                <img src="{{asset('storage/images' . $item->file_path)}}" alt="{{$item->name}}">
+                <img src="{{asset('/storage/' . $item->file_path)}}" alt="{{$item->name}}">
                 <h3 class="image-gallery__container-name">
                     {{$item->name}}
                 </h3>
