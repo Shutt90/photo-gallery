@@ -14,6 +14,7 @@
         <div class="image-head__links">
             <a class="fake-link gal">Gallery</a>
             <a class="fake-link cat">Categories</a>
+            <a href="{{route('logout')}}" class="fake-link">Logout</a>
         </div>
     </div>
     <section class="image">
