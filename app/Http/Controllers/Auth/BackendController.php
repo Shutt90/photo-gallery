@@ -13,7 +13,7 @@ class BackendController extends Controller
     {
 
         $gallery = Gallery::with('categoryRelation')->orderBy('id', 'desc')->get();
-        $category = Category::orderBy('id', 'asc')->get();
+        $category = Category::orderBy('id', 'desc')->get();
 
         return view('admin.view', compact('gallery','category'));
         
@@ -42,7 +42,7 @@ class BackendController extends Controller
             ->with('Success', 'Image has successfully been uploaded');
 
         } elseif ($request->name) {
-            
+
             $request->validate([
                 'name' => 'required|max:20',
             ]);
@@ -61,19 +61,22 @@ class BackendController extends Controller
     public function update(Request $request, int $id)
     {
 
-        $validated = $request->validate([
-            'title' => 'max:20',
-            'category_id' => 'integer',
-        ]);
+        if($request->title){
 
-        if($validated) {
-            Gallery::findOrFail($id)
-            ->update([
-                'title' => $request->title,
-                'category_id' => $request->category_id,
+            $validated = $request->validate([
+                'title' => 'max:20',
+                'category_id' => 'integer',
             ]);
-        
-            return back()->with('success', "Image has been updated");
+
+            if($validated) {
+                Gallery::findOrFail($id)
+                ->update([
+                    'title' => $request->title,
+                    'category_id' => $request->category_id,
+                ]);
+            
+                return back()->with('success', "Image has been updated");
+            }
         }
 
     }
@@ -81,6 +84,7 @@ class BackendController extends Controller
     public function destroy(int $id)
     {
         Gallery::find($id)->delete();
+        Category::find($id)->delete();
 
         return back()->with('success', 'Image deleted');
     }

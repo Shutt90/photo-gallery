@@ -22,7 +22,9 @@
                 @csrf
                 @method('POST')
                 <input type="file" name="file_path">
+                <label for="title">Title:</label>
                 <input type="text" name="title">
+                <label for="category_id">Select Category</label>
                 <select name="category_id">
                     @foreach($category as $cat)
                     <option value="{{$cat->id}}">{{$cat->name}}</option>
@@ -69,15 +71,22 @@
     </section>
 
     <section class="categories">
-    <div class="categories-upload">
+        <div class="categories-upload">
             {{Form::open(array('route' => 'admin.store'))}}
             @csrf
             @method('POST')
             <label for="category">Add New Category</label>
             <input type="text" name="category">
             <input class=""type="submit">
-
             {{Form::close()}}
+        </div>
+        <div class="categories-delete">
+            @foreach($category as $cat)
+            {{Form::open(array('route' => array('admin.destroy', $cat->id)))}}
+            @csrf
+            @method('DELETE')
+                <li>{{$cat->name}}</li>
+            @endforeach
         </div>
     </section>
         
