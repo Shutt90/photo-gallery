@@ -21,26 +21,41 @@ class BackendController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:20',
-            'file_path' => 'required|mimes:jpg,png,jpeg',
-            'category_id' => 'required|integer',
-        ]);
-
-
-        $fileModel = new Gallery;
 
         if($request->file('file_path')) {
+
+            $request->validate([
+                'title' => 'required|string|max:20',
+                'file_path' => 'required|mimes:jpg,png,jpeg',
+                'category_id' => 'required|integer',
+            ]);
+
+            $fileModel = new Gallery;
             $fileName = time() . '_' . $request->file_path->getClientOriginalName();
             $filePath = $request->file('file_path')->storeAs('images', $fileName, 'public');
             $fileModel->title = $request->title;
             $fileModel->file_path = $filePath;
             $fileModel->category_id = $request->category_id;
             $fileModel->save();
+
+            return back()
+            ->with('Success', 'Image has successfully been uploaded');
+
+        } elseif ($request->name) {
+            
+            $request->validate([
+                'name' => 'required|max:20',
+            ]);
+
+            Category::create([
+                'name' => $request->name
+            ]);
+
+            return back()
+            ->with('Success', 'Category has successfully been added');
         };
 
-        return back()
-        ->with('Success', 'Image has successfully been uploaded');
+    
     }
 
     public function update(Request $request, int $id)
