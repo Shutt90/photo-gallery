@@ -2062,6 +2062,21 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var galLink = document.querySelector('.gal');
+var catLink = document.querySelector('.cat');
+var galDisplay = document.querySelector('.image');
+var catDisplay = document.querySelector('.categories'); // galLink.addEventListener('click', displayAdmin(galDisplay, catDisplay));
+// catLink.addEventListener('click', displayAdmin(catDisplay, galDisplay));
+
+catLink.addEventListener('click', function () {
+  catDisplay.style.display = "block";
+  galDisplay.style.display = "none";
+});
+galLink.addEventListener('click', function () {
+  galDisplay.style.display = "block";
+  catDisplay.style.display = "none";
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

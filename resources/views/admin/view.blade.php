@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js" type="module" defer></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Area</title>
 </head>
@@ -11,8 +12,8 @@
     <div class="image-head">
         <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
         <div class="image-head__links">
-            <a class="fake-link">Gallery</a>
-            <a class="fake-link">Categories</a>
+            <a class="fake-link gal">Gallery</a>
+            <a class="fake-link cat">Categories</a>
         </div>
     </div>
     <section class="image">
@@ -69,7 +70,13 @@
 
     <section class="categories">
     <div class="categories-upload">
-            {{Form::open(array('route' => 'admin.store' ,'files'=>'true'))}}
+            {{Form::open(array('route' => 'admin.store'))}}
+            @csrf
+            @method('POST')
+            <label for="category">Add New Category</label>
+            <input type="text" name="category">
+            <input class=""type="submit">
+
             {{Form::close()}}
         </div>
     </section>
