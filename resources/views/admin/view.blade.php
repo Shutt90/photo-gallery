@@ -10,7 +10,7 @@
     <section>
         <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
         <div class="image-upload">
-            <form method="POST" action="{{route('admin.store')}}" enctype="multipart/form-data">
+            {{Form::open(array('route' => 'admin.store' ,'files'=>'true'))}}
                 @csrf
                 @method('POST')
                 <input type="file" name="file_path">
@@ -21,13 +21,13 @@
                     @endforeach
                 </select>
                 <input name="submit" type="submit">
-            </form>
+            {{Form::close()}}
         </div>
 
         <div class="image-gallery">
             @foreach($gallery as $item)
             <div class="image-gallery__container">
-                <img src="{{asset('storage/images/' . $item->file_path)}}" alt="{{$item->name}}">
+                <img src="{{asset('storage/images' . $item->file_path)}}" alt="{{$item->name}}">
                 <h3 class="image-gallery__container-name">
                     {{$item->name}}
                 </h3>

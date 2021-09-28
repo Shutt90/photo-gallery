@@ -30,23 +30,20 @@ class BackendController extends Controller
         Gallery::create([
             'title' => $request->title,
             'category_id' => $request->category_id,
-            'file_path' => $request->file_path,
         ]);
 
-        $fileModel = $request->file_path;
+        $fileModel = Gallery::create(['file_path' => $request->file_path]);
 
-        if($request->file()) {
+        if($request->file('file_path')) {
             $fileName = time() . '_' . $request->file_path->getClientOriginalName();
             $filePath = $request->file('file_path')->storeAs('images', $fileName, 'public');
-            $fileModel->file_path = time() . '_' . $request->file_path->getClientOriginalName();
-            $fileModel->pathname = '/storage/app/public/images/' .  $filePath;
-
-            dd($fileModel);
-
-            return back()
-            ->with('Success', 'Image has successfully been uploaded')
-            ->with('file', $fileName);
+            $fileModel->title = time() . '_' . $request->file_path->getClientOriginalName();
+            $fileModel->file_path = $filePath;
+            $fileModel->save();
         };
+
+        return back()
+        ->with('Success', 'Image has successfully been uploaded');
     }
 
     public function update(Request $request, int $id)
