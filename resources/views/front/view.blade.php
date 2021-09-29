@@ -37,8 +37,8 @@
 
     let imgs = [];
 
-    @foreach($gallery as $item)
-    imgs.push("{{asset('/storage/' . $item->file_path)}}");
+    @foreach($catFive as $item)
+    imgs.push("{{asset('/storage/' . $item)}}");
     @endforeach
 
     const slideShow = function(){

@@ -19,7 +19,7 @@ class Gallery extends Model
     public function categoryRelation()
     {
 
-        return $this->hasOne(Category::class, 'id', 'category_id');
+        return $this->belongsTo(Category::class);
 
     }
 }

@@ -13,9 +13,23 @@ class GalleryController extends Controller
     {
 
         $gallery = Gallery::with('categoryRelation')->orderBy('id', 'desc')->get();
-        $category = Category::orderBy('id', 'asc')->get();
+        $category = Category::with('galleryRelation')->orderBy('id', 'asc')->get();
 
-        return view('front.view', compact('gallery','category'));
+        $catArr = [];
+
+        foreach($category as $item => $value){
+            array_push($catArr, $value->galleryRelation->pluck('file_path'));
+        };
+
+        return view('front.view', [
+            'gallery' => $gallery,
+            'category' => $category,
+            'catOne' => $catArr[0],
+            'catTwo' => $catArr[1],
+            'catThree' => $catArr[2],
+            'catFour' => $catArr[3],
+            'catFive' => $catArr[4],
+        ]);
         
     }
 

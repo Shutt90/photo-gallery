@@ -15,7 +15,17 @@ class BackendController extends Controller
         $gallery = Gallery::with('categoryRelation')->orderBy('id', 'desc')->get();
         $category = Category::orderBy('id', 'desc')->get();
 
-        return view('admin.view', compact('gallery','category'));
+        $catArr = [];
+
+        foreach($category as $item => $value){
+            array_push($catArr, $value->galleryRelation->pluck('file_path'));
+        };
+
+        return view('admin.view', [
+            'gallery' => $gallery,
+            'category' => $category,
+            'catArr' =>$catArr,
+        ]);
         
     }
 
