@@ -93,17 +93,3 @@
         
 </body>
 </html>
-
-<script>
-
-const arr = [1, 2, 3, 4, 5];
-
-for(let i=1;i < arr.length; i++) {
-
-    const newVariable`${i}` = i;
-
-    console.log(newVariable)
-
-}
-
-</script>
