@@ -71,7 +71,7 @@ class BackendController extends Controller
     public function update(Request $request, int $id)
     {
 
-        if($request->title){
+        if($request->title || $request->category_id){
 
             $validated = $request->validate([
                 'title' => 'max:20',

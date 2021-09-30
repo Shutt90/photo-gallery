@@ -20,7 +20,7 @@
     </div>
     <nav class="nav">
         @foreach($category as $nav)
-        <a class="fake-nav">
+        <a class="fake-nav" onclick="slideShow()">
             {{$nav->name}}
         </a>
         @endforeach
@@ -35,22 +35,42 @@
     var i = 0;  
     const TIME = 3000;
 
-    let imgs = [];
+    let catOne = [];
+    let catTwo = [];
+    let catThree = [];
+    let catFour = [];
+    let catFive = [];
 
-    @foreach($catFive as $item)
-    imgs.push("{{asset('/storage/' . $item)}}");
+    @foreach($catOne as $item)
+    catOne.push("{{asset('/storage/' . $item)}}");
     @endforeach
 
-    const slideShow = function(){
-        let current = (document.slider.src = imgs[i]);
-        if (i < imgs.length - 1) {
+    @foreach($catTwo as $item)
+    catTwo.push("{{asset('/storage/' . $item)}}");
+    @endforeach
+
+    @foreach($catThree as $item)
+    catThree.push("{{asset('/storage/' . $item)}}");
+    @endforeach
+
+    @foreach($catFour as $item)
+    catFour.push("{{asset('/storage/' . $item)}}");
+    @endforeach
+
+    @foreach($catFive as $item)
+    catFive.push("{{asset('/storage/' . $item)}}");
+    @endforeach
+
+    const slideShow = function(category){
+        let current = (document.slider.src = category[i]);
+        if (i < category.length - 1) {
         i++;
         } else i = 0;
 
-        setTimeout("slideShow()", TIME);
+        setTimeout(`slideShow(${category})`, TIME);
     };
 
-    window.onload = slideShow();
+    window.onload = slideShow(catOne);
 
     </script>
 </html>
