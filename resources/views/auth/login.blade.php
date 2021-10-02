@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/app.css">
     <title>Login</title>
 </head>
 <body>
-    <form method="POST" action="{{route('login.store')}}">
-        @csrf
-        <label for="username">Username:</label>
-        <input type="text" name="email">
-        <label for="password">Password:</label>
-        <input type="password" name="password">
-        <input type="submit">
+    <section class="login">
+        <form method="POST" class="login-form" action="{{route('login.store')}}">
+            @csrf
+            <label class="login-form-label" for="username">Username:</label>
+            <input class="login-form-input" type="text" name="email">
+            <label class="login-form-label" for="password">Password:</label>
+            <input class="login-form-input" type="password" name="password">
+            <input class="login-form-button" type="submit">
 
-        @include('admin.errors')
+            @include('admin.errors')
 
-    </form>
+        </form>
+    </section>
 </body>
 </html>
