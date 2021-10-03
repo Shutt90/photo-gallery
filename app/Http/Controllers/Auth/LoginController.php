@@ -27,15 +27,21 @@ class LoginController extends Controller
         if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
             return back()->with('status', 'Invalid login details');
         }
+
+        $remember = $request->remember === "on" ? true : false;
             
-        auth()->attempt($request->only('email', 'password'));
+        if(auth()->attempt($request->only('email', 'password'), $remember)){
+            $user = Auth::user();
+
+            
+        }
 
         return redirect()->route('admin.index');
         
         
     }
 
-    public function logout(Request $request) {
+    public function logout() {
         Auth::logout();
         return redirect('/');
       }

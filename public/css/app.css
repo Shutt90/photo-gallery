@@ -98,6 +98,16 @@ img {
     background-color: #56cfe1;
 }
 
+.login-form-remember {
+    display: flex;
+    margin: 0.5rem;
+}
+
+.login-form .login-form-check {
+    margin: 0.5rem;
+    padding: 0.2rem;
+}
+
 
 /* Gallery Admin View */
 

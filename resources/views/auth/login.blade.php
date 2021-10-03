@@ -15,6 +15,10 @@
             <input class="login-form-input" type="text" name="email">
             <label class="login-form-label" for="password">Password:</label>
             <input class="login-form-input" type="password" name="password">
+            <div class="login-form-remember">
+                <label class="login-form-label" for="remember">Remember Me?</label>
+                <input class="login-form-check" type="checkbox" name="remember">
+            </div>
             <input class="login-form-button" type="submit">
 
             @include('admin.errors')
