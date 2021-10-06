@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 
+
 class BackendController extends Controller
 {
     public function index()
@@ -71,7 +72,7 @@ class BackendController extends Controller
     public function update(Request $request, int $id)
     {
 
-        if($request->title || $request->category_){
+        if($request->title || $request->category_id){
 
             $validated = $request->validate([
                 'title' => 'max:20',
@@ -91,16 +92,18 @@ class BackendController extends Controller
 
     }
 
-    public function destroy(int $id)
-    {
-        Gallery::find($id)->delete();
-        return back()->with('error', 'Image deleted');
-    }
+    public function destroy(Request $request, int $id)
+    {   
 
-    public function destroyCat(int $id)
-    {
-        Category::find($id)->delete();
-        return back()->with('error', 'Image deleted');
+        if($request->input(['deleteimage'])) {
+            Gallery::find($id)->delete();
+            return redirect()->route('admin.index')->with('error', 'Image deleted');
+        }
+
+        if($request->input(['deletecat'])) {
+            Category::find($id)->delete();
+            return redirect()->route('admin.index')->with('error', 'Category deleted');
+        }
     }
 
 }

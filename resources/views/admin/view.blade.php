@@ -51,7 +51,7 @@
                     @method('PUT')
                     @csrf
                     <label for="title">Image Name:</label>
-                    <input type="text" name="title">
+                    <input type="text" name="title" value="{{$item->name}}">
                     <label for="category_id">Category:</label>
                     <select name="category_id">
                         @foreach($category as $cat)
@@ -64,7 +64,7 @@
                     @csrf
                     @method('DELETE')
                     <div class="delete">
-                        <button class="delete" name="delete" type="submit">
+                        <button class="delete" name="deleteimage" type="submit">
                             <img src="{{asset('storage/images/delete-icon.png')}}">
                         </button>
                     </div>
@@ -72,8 +72,7 @@
             </div>
             @endforeach
             @include('admin.errors')
-        </div>
-        
+        </div>        
     </section>
 
     <section class="categories">
@@ -92,6 +91,10 @@
             @csrf
             @method('DELETE')
                 <li>{{$cat->name}}</li>
+                <button class="delete" onclick="confirm('Are you sure??')" name="deletecat" type="submit">
+                    <img src="{{asset('storage/images/delete-icon.png')}}">
+                </button>
+            {{Form::close()}}
             @endforeach
         </div>
     </section>

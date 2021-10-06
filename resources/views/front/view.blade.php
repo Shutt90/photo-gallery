@@ -57,20 +57,21 @@
     catFour.push("{{asset('/storage/' . $item)}}");
     @endforeach
 
+    
     @foreach($catFive as $item)
     catFive.push("{{asset('/storage/' . $item)}}");
     @endforeach
 
-    const slideShow = function(category){
-        let current = (document.slider.src = category[i]);
-        if (i < category.length - 1) {
+    const slideShow = function(){
+        let current = (document.slider.src = catFive);
+        if (i < catFive.length - 1) {
         i++;
         } else i = 0;
 
-        setTimeout(`slideShow(${category})`, TIME);
+        setTimeout(`slideShow()`, TIME);
     };
 
-    window.onload = slideShow(catOne);
+    window.onload = slideShow();
 
     </script>
 </html>
