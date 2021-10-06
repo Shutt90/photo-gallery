@@ -49,7 +49,7 @@ class BackendController extends Controller
             $fileModel->save();
 
             return back()
-            ->with('Success', 'Image has successfully been uploaded');
+            ->with('success', 'Image has successfully been uploaded');
 
         } elseif ($request->name) {
 
@@ -62,7 +62,7 @@ class BackendController extends Controller
             ]);
 
             return back()
-            ->with('Success', 'Category has successfully been added');
+            ->with('success', 'Category has successfully been added');
         };
 
     
@@ -71,7 +71,7 @@ class BackendController extends Controller
     public function update(Request $request, int $id)
     {
 
-        if($request->title || $request->category_id){
+        if($request->title || $request->category_){
 
             $validated = $request->validate([
                 'title' => 'max:20',
@@ -94,9 +94,13 @@ class BackendController extends Controller
     public function destroy(int $id)
     {
         Gallery::find($id)->delete();
-        Category::find($id)->delete();
+        return back()->with('error', 'Image deleted');
+    }
 
-        return back()->with('success', 'Image deleted');
+    public function destroyCat(int $id)
+    {
+        Category::find($id)->delete();
+        return back()->with('error', 'Image deleted');
     }
 
 }

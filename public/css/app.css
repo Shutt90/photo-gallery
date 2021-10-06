@@ -108,6 +108,21 @@ img {
     padding: 0.2rem;
 }
 
+/* Flash & Errors */
+.flash-message-success {
+    width: 100vw;
+    background-color: greenyellow;
+    color: black;
+    text-align: center;
+}
+
+.flash-message-error {
+    width: 100vw;
+    background-color: crimson;
+    color: white;
+    text-align: center;
+}
+
 
 /* Gallery Admin View */
 

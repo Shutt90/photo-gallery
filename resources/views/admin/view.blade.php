@@ -9,6 +9,11 @@
     <title>Admin Area</title>
 </head>
 <body>
+    @if(Session::has('success'))
+    <div class="flash-message-success">{{Session::get('success')}}</div>
+    @elseif(Session::has('error'))
+    <div class="flash-message-error">{{Session::get('error')}}</div>
+    @endif
     <div class="image-head">
         <h1 class="welcome">Welcome Back {{Auth::user()->name}}</h1>
         <div class="image-head__links">
@@ -59,7 +64,7 @@
                     @csrf
                     @method('DELETE')
                     <div class="delete">
-                        <button class="delete" type="submit">
+                        <button class="delete" name="delete" type="submit">
                             <img src="{{asset('storage/images/delete-icon.png')}}">
                         </button>
                     </div>

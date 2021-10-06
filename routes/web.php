@@ -23,3 +23,4 @@ Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->n
 
 
 Route::resource('/admin', BackendController::class)->middleware('auth')->only('index', 'store', 'update', 'destroy');
+Route::delete('/admin', BackendController::class, 'destroyCat')->middleware('auth');
