@@ -2060,22 +2060,20 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-var galLink = document.querySelector('.gal');
-var catLink = document.querySelector('.cat');
-var galDisplay = document.querySelector('.image');
-var catDisplay = document.querySelector('.categories'); // galLink.addEventListener('click', displayAdmin(galDisplay, catDisplay));
-// catLink.addEventListener('click', displayAdmin(catDisplay, galDisplay));
-
-catLink.addEventListener('click', function () {
-  catDisplay.style.display = "block";
-  galDisplay.style.display = "none";
-});
-galLink.addEventListener('click', function () {
-  galDisplay.style.display = "block";
-  catDisplay.style.display = "none";
-});
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const galLink = document.querySelector('.gal');
+// const catLink = document.querySelector('.cat');
+// const galDisplay = document.querySelector('.image');
+// const catDisplay = document.querySelector('.categories');
+// // galLink.addEventListener('click', displayAdmin(galDisplay, catDisplay));
+// // catLink.addEventListener('click', displayAdmin(catDisplay, galDisplay));
+// catLink.addEventListener('click', function() {
+//     catDisplay.style.display = "block";
+//     galDisplay.style.display = "none";
+// });
+// galLink.addEventListener('click', function() {
+//     galDisplay.style.display = "block";
+//     catDisplay.style.display = "none";
+// });
 
 /***/ }),
 

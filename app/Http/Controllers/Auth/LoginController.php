@@ -33,7 +33,7 @@ class LoginController extends Controller
         if(auth()->attempt($request->only('email', 'password'), $remember)){
             $user = Auth::user();
 
-            
+
         }
 
         return redirect()->route('admin.index');

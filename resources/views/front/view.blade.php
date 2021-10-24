@@ -20,7 +20,7 @@
     </div>
     <nav class="nav">
         @foreach($category as $nav)
-        <a class="fake-nav" onclick="slideShow()">
+        <a class="fake-nav">
             {{$nav->name}}
         </a>
         @endforeach
@@ -35,36 +35,17 @@
     var i = 0;  
     const TIME = 3000;
 
-    let catOne = [];
-    let catTwo = [];
-    let catThree = [];
-    let catFour = [];
-    let catFive = [];
+    let currentCat = [];
 
-    @foreach($catOne as $item)
-    catOne.push("{{asset('/storage/' . $item)}}");
+    @foreach($category as $item)
+        @foreach($item->galleryRelation as $image)
+            currentCat.push("{{asset('/storage/' . $image->file_path)}}");
+        @endforeach
     @endforeach
-
-    @foreach($catTwo as $item)
-    catTwo.push("{{asset('/storage/' . $item)}}");
-    @endforeach
-
-    @foreach($catThree as $item)
-    catThree.push("{{asset('/storage/' . $item)}}");
-    @endforeach
-
-    @foreach($catFour as $item)
-    catFour.push("{{asset('/storage/' . $item)}}");
-    @endforeach
-
     
-    @foreach($catFive as $item)
-    catFive.push("{{asset('/storage/' . $item)}}");
-    @endforeach
-
     const slideShow = function(){
-        let current = (document.slider.src = catFive);
-        if (i < catFive.length - 1) {
+        let current = (document.slider.src = currentCat);
+        if (i < currentCat.length - 1) {
         i++;
         } else i = 0;
 
